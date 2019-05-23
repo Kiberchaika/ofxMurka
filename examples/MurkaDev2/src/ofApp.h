@@ -1,18 +1,18 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxLiveApp.h"
+//#include "ofxLiveApp.h"
 #include "ofxMurka.h"
 
 
-class ofApp : public ofxLiveApp {
+class ofApp : public ofBaseApp {
 
 	public:
 		void setup();
 		void update();
 		void draw();
 
-		void reinit() override;
+		//void reinit() override;
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -29,10 +29,10 @@ class ofApp : public ofxLiveApp {
 		Murka murka;
 
 		MurkaWidgetButton b = { "ok", // label
-		[]() {
-			ofLog() << "alright, clicked on it...";
-		}, // button press callback
-		{100, 100, 75, 25} // shape on screen
+                                []() {
+                                    ofLog() << "alright, clicked on it...";
+                                }, // button press callback
+                                {100, 100, 75, 25} // shape on screen
 		};
 
 		MurkaWidgetTypeInt m1;
