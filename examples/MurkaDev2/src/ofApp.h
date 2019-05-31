@@ -28,12 +28,9 @@ class ofApp : public ofBaseApp {
 		
 		Murka murka;
 
-		MurkaWidgetButton b = { "ok", // label
-                                []() {
-                                    ofLog() << "alright, clicked on it...";
-                                }, // button press callback
-                                {100, 100, 75, 25} // shape on screen
-		};
+        MurkaWidgetButton b;
+    
+        MurkaViewHandler* b1;
 
 		MurkaWidgetTypeInt m1;
 		MurkaWidgetTypeFloat m2;

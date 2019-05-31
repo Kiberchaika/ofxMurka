@@ -2,18 +2,21 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	murka.addChildToView(murka.getRootView(), &b, NULL);
     
-//    b.Label = "aga";
-//    b.menuList = {"x", "y", "z"};
+    // Should I bundle parameters into the widget object instead
+    // of a separate parameters object?
     
-    murka.addChildToView(murka.getRootView(), new MurkaWidgetButton("ok", // label
-        []() {
-            ofLog() << "alright, clicked on it...";
-        }, // button press callback
-        {100, 100, 75, 25} // shape on screen
-    ), NULL);
-
+    b1 = murka.addChildToView(new MurkaWidgetButton(),
+                              NULL, // the data it controls
+                              new MurkaWidgetButton::Parameters{.r = 100,
+                                                                .g = 30,
+                                                                .b = 75,
+                                                                .label = "yo",
+                                                                .Callback = [](){}},
+                              {100, 100, 100, 35});
+    
+    ((MurkaWidgetButton::Parameters*)b1->parametersObject)->label = "nonyo";
+    
 }
 
 //--------------------------------------------------------------
@@ -33,13 +36,17 @@ void ofApp::reinit() {
 void ofApp::draw(){
 	ofClear(30);
     
-    ofLog() << "!!!";
+    ofSetColor(255, 0, 0);
+    
+    
+//    ofLog() << "!!!";
 
 //    ofLog() << "calling draw cycle";
-//    murka.drawCycle();
+    murka.drawCycle();
     
 //    ofLog() << murka.children.size();
     
+    /*
     MurkaContext m = MurkaContext();
     m.currentViewShape.position = {100, 100};
     m.currentViewShape.size = {100, 30};
@@ -67,6 +74,8 @@ void ofApp::draw(){
 //    b.draw(NULL, mmm, m);
     
     ofLog() << ";;;;";
+     
+     */
 }
 
 //--------------------------------------------------------------
