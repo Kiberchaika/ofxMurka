@@ -5,18 +5,22 @@ void ofApp::setup(){
     
     // Should I bundle parameters into the widget object instead
     // of a separate parameters object?
+
+    auto params = new MurkaWidgetButton::Parameters{.r = 100,
+                                                    .g = 0,
+                                                    .b = 0,
+                                                    .label = "yo",
+                                                    .Callback = [](){}};
     
-    b1 = murka.addChildToView(new MurkaWidgetButton(),
-                              NULL, // the data it controls
-                              new MurkaWidgetButton::Parameters{.r = 100,
-                                                                .g = 30,
-                                                                .b = 75,
-                                                                .label = "yo",
-                                                                .Callback = [](){}},
-                              {100, 100, 100, 35});
-    
-    ((MurkaWidgetButton::Parameters*)b1->parametersObject)->label = "nonyo";
-    
+//    b1 = murka.addChildToViewT(new MurkaWidgetButton(),
+//                              NULL, // the data it controls
+//                              params,
+//                              {100, 100, 100, 35});
+
+    b1 = murka.addChildToViewT(new MurkaWidgetButton(),
+                               NULL, // the data it controls
+                               params,
+                               {100, 100, 100, 35});
 }
 
 //--------------------------------------------------------------
@@ -38,44 +42,21 @@ void ofApp::draw(){
     
     ofSetColor(255, 0, 0);
     
+    /*
+    MurkaWidgetButton::parameters(murka.children[0])->r = sin(ofGetElapsedTimef() * 10) * 100 + 100;
+    */
     
-//    ofLog() << "!!!";
+    
+//    MurkaWidgetButton::parameters(b1)->g = sin(ofGetElapsedTimef() * 20) * 100 + 100;
+    
+    
+    b1->tParams->b = sin(ofGetElapsedTimef() * 10) * 100 + 100;
+    
+    
 
-//    ofLog() << "calling draw cycle";
     murka.drawCycle();
     
-//    ofLog() << murka.children.size();
-    
-    /*
-    MurkaContext m = MurkaContext();
-    m.currentViewShape.position = {100, 100};
-    m.currentViewShape.size = {100, 30};
-    auto mm = murka.children.back();
-    auto mmm = get<0>(mm);
-    
-    auto castedParametersObject = ((MurkaWidgetButton*)mmm);
-    ofLog() << "label = " << castedParametersObject->Label;
-    ofLog() << "real label = " << b.Label;
-    
-    auto draw2 = [](void* data, void* parametersObject, MurkaContext & context)->void* {
-        auto castedParametersObject = ((MurkaWidgetButton*)parametersObject);
-        ofLog() << "and now the label is " << castedParametersObject->Label;
-        //            ofLog() << "calling the button draw...";
 
-    };
-    
-
-
-    draw2(NULL, mmm, m);
-    
-    
-    auto copiedDraw = b.draw;
-//    copiedDraw(NULL, mmm, m);
-//    b.draw(NULL, mmm, m);
-    
-    ofLog() << ";;;;";
-     
-     */
 }
 
 //--------------------------------------------------------------

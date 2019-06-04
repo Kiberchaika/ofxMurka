@@ -30,8 +30,10 @@ class ofApp : public ofBaseApp {
 
         MurkaWidgetButton b;
     
-        MurkaViewHandler* b1;
+        MurkaViewHandler<MurkaWidgetButton>*  b1;
 
+    /*
 		MurkaWidgetTypeInt m1;
 		MurkaWidgetTypeFloat m2;
+     */
 };
