@@ -5,15 +5,15 @@ void ofApp::setup(){
     
     panel1 = murka.addChildToViewT(new MurkaBlankPanel(),
                                    NULL,
-                                   {.r = 100, .g = 20, .b = 20, .label = "panel1"},
+                                   {100, 20, 20, "panel1"},
                                    {50, 50, 250, 500});
     
     
-    auto params = new MurkaWidgetButton::Parameters{.r = 100,
-                                                    .g = 0,
-                                                    .b = 0,
-                                                    .label = "yo",
-                                                    .Callback = [](){}};
+    auto params = new MurkaWidgetButton::Parameters{100,
+                                                    0,
+                                                    0,
+                                                    "yo",
+                                                    [](){}};
     
     b1 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
