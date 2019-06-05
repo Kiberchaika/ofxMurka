@@ -1,2 +1,1 @@
-ofxLiveApp
 ofxMurka

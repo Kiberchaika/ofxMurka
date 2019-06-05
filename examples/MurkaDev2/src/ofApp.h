@@ -31,9 +31,5 @@ class ofApp : public ofBaseApp {
         MurkaWidgetButton b;
     
         MurkaViewHandler<MurkaWidgetButton>*  b1;
-
-    /*
-		MurkaWidgetTypeInt m1;
-		MurkaWidgetTypeFloat m2;
-     */
+        MurkaViewHandler<MurkaBlankPanel>* panel1;
 };

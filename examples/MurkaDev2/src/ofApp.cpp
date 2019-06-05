@@ -3,24 +3,22 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    // Should I bundle parameters into the widget object instead
-    // of a separate parameters object?
-
+    panel1 = murka.addChildToViewT(new MurkaBlankPanel(),
+                                   NULL,
+                                   {.r = 100, .g = 20, .b = 20, .label = "panel1"},
+                                   {50, 50, 250, 500});
+    
+    
     auto params = new MurkaWidgetButton::Parameters{.r = 100,
                                                     .g = 0,
                                                     .b = 0,
                                                     .label = "yo",
                                                     .Callback = [](){}};
     
-//    b1 = murka.addChildToViewT(new MurkaWidgetButton(),
-//                              NULL, // the data it controls
-//                              params,
-//                              {100, 100, 100, 35});
-
-    b1 = murka.addChildToViewT(new MurkaWidgetButton(),
+    b1 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
                                params,
-                               {100, 100, 100, 35});
+                               {20, 20, 100, 35});
 }
 
 //--------------------------------------------------------------
@@ -49,8 +47,12 @@ void ofApp::draw(){
     
 //    MurkaWidgetButton::parameters(b1)->g = sin(ofGetElapsedTimef() * 20) * 100 + 100;
     
+    auto time = ofGetElapsedTimef();
     
-    b1->tParams->b = sin(ofGetElapsedTimef() * 10) * 100 + 100;
+//    panel1->shape.position = {100 + 50 * sin(time * 5), 50};
+    
+    
+    b1->tParams->b = sin(time * 10) * 100 + 100;
     
     
 
