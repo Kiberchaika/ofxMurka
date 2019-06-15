@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
     
     panel1 = murka.addChildToViewT(new MurkaBlankPanel(),
                                    NULL,
@@ -9,16 +10,23 @@ void ofApp::setup(){
                                    {50, 50, 250, 500});
     
     
-    auto params = new MurkaWidgetButton::Parameters{100,
-                                                    0,
-                                                    0,
-                                                    "yo",
-                                                    [](){}};
-    
     b1 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
-                               params,
+                               {"button1"},
                                {20, 20, 100, 35});
+
+
+    auto params2 = new MurkaWidgetButton::Parameters("button2");
+
+    b2 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
+                               NULL, // the data it controls
+                               {120, 120, 120, "button2"},
+                               {20, 120, 100, 35});
+    
+    slider1 = murka.addChildToViewT(panel1, new MurkaSliderFloat(),
+                                    &TESTER,
+                                    {0, 1, "slider 1"},
+                                    {20, 220, 210, 35});
 }
 
 //--------------------------------------------------------------
@@ -26,26 +34,11 @@ void ofApp::update(){
 
 }
 
-/*
-void ofApp::reinit() {
-	ofLog() << "reinited... " << ofRandomuf() * 23;
-
-
-}
- */
-
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofClear(30);
     
     ofSetColor(255, 0, 0);
-    
-    /*
-    MurkaWidgetButton::parameters(murka.children[0])->r = sin(ofGetElapsedTimef() * 10) * 100 + 100;
-    */
-    
-    
-//    MurkaWidgetButton::parameters(b1)->g = sin(ofGetElapsedTimef() * 20) * 100 + 100;
     
     auto time = ofGetElapsedTimef();
     
@@ -58,6 +51,10 @@ void ofApp::draw(){
 
     murka.drawCycle();
     
+//    if (b1->getResults() == true) ofLog() << "button 1 true!";
+//    if (b2->getResults() == true) ofLog() << "button 2 true!";
+    
+//    ofLog() << *(b1->castResults(b1->resultsInternal));
 
 }
 
