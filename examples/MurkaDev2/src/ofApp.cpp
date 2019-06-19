@@ -6,27 +6,24 @@ void ofApp::setup(){
     
     panel1 = murka.addChildToViewT(new MurkaBlankPanel(),
                                    NULL,
-                                   {100, 20, 20, "panel1"},
-                                   {50, 50, 250, 500});
+                                   {"panel1", true},
+                                   {50, 50, 260, 500});
     
     
     b1 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
                                {"button1"},
-                               {20, 20, 100, 35});
-
-
-    auto params2 = new MurkaWidgetButton::Parameters("button2");
+                               {20, 120, 100, 35});
 
     b2 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
                                {120, 120, 120, "button2"},
-                               {20, 120, 100, 35});
+                               {140, 120, 100, 35});
     
     slider1 = murka.addChildToViewT(panel1, new MurkaSliderFloat(),
                                     &TESTER,
                                     {0, 1, "slider 1"},
-                                    {20, 220, 210, 35});
+                                    {20, 220, 220, 35});
 }
 
 //--------------------------------------------------------------
@@ -55,6 +52,20 @@ void ofApp::draw(){
 //    if (b2->getResults() == true) ofLog() << "button 2 true!";
     
 //    ofLog() << *(b1->castResults(b1->resultsInternal));
+
+    
+    ///////////////// Immediate mode
+    
+    murka.beginDrawingInView(&murka);
+    MurkaBlankPanel::imDraw(murka, {"panel2", true}, {350, 50, 260, 500});
+    murka.beginDrawingInLatestView();
+    MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 2"}, {20, 120, 220, 35});
+    MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 3"}, {20, 320, 220, 35});
+    MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 4"}, {20, 420, 220, 35});
+    MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 5"}, {20, 520, 220, 35});
+
+    
+//    imDraw<MurkaSliderFloat>::imDraw
 
 }
 

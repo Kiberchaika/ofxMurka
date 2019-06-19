@@ -36,5 +36,5 @@ class ofApp : public ofBaseApp {
         MurkaViewHandler<MurkaBlankPanel>* panel1;
     
     
-    float TESTER;
+    float TESTER, TESTER2;
 };
