@@ -53,17 +53,17 @@ void ofApp::draw(){
     
 //    ofLog() << *(b1->castResults(b1->resultsInternal));
 
-    
-    ///////////////// Immediate mode
-    
-    murka.beginDrawingInView(&murka);
-    MurkaBlankPanel::imDraw(murka, {"panel2", true}, {350, 50, 260, 500});
-    murka.beginDrawingInLatestView();
-    MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 2"}, {20, 120, 220, 35});
-    MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 3"}, {20, 320, 220, 35});
-    MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 4"}, {20, 420, 220, 35});
-    MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 5"}, {20, 520, 220, 35});
-
+    /*
+        ///////////////// Immediate mode
+        
+        murka.beginDrawingInView(&murka);
+        MurkaBlankPanel::imDraw(murka, {"panel2", true}, {350, 50, 260, 500});
+        murka.beginDrawingInLatestView();
+        MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 2"}, {20, 120, 220, 35});
+        MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 3"}, {20, 320, 220, 35});
+        MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 4"}, {20, 420, 220, 35});
+        MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 5"}, {20, 520, 220, 35});
+*/
     
 //    imDraw<MurkaSliderFloat>::imDraw
 
