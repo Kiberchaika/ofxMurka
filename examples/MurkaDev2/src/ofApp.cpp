@@ -33,7 +33,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofClear(30);
+	ofClear(10);
     
     ofSetColor(255, 0, 0);
     
@@ -48,24 +48,39 @@ void ofApp::draw(){
 
     murka.drawCycle();
     
-//    if (b1->getResults() == true) ofLog() << "button 1 true!";
-//    if (b2->getResults() == true) ofLog() << "button 2 true!";
+    if (b1->getResults() == true) ofLog() << "button 1 true!";
+    if (b2->getResults() == true) ofLog() << "button 2 true!";
     
 //    ofLog() << *(b1->castResults(b1->resultsInternal));
 
-    /*
+    
         ///////////////// Immediate mode
-        
+        /*
         murka.beginDrawingInView(&murka);
+        ofLog() << " 1 - context counter: " << murka.currentContext.getImCounter();
+        MurkaBlankPanel::Parameters p = {350, 50, 260, "500"};
         MurkaBlankPanel::imDraw(murka, {"panel2", true}, {350, 50, 260, 500});
+        ofLog() << " 1.5 - context counter: " << murka.currentContext.getImCounter();
+
+    
         murka.beginDrawingInLatestView();
         MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 2"}, {20, 120, 220, 35});
-        MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 3"}, {20, 320, 220, 35});
-        MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 4"}, {20, 420, 220, 35});
-        MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 5"}, {20, 520, 220, 35});
+        MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 3"}, {20, 220, 220, 35});
+        MurkaSliderFloat::imDraw(murka, &TESTER, {"slider 4"}, {20, 320, 220, 35});
+        MurkaSliderFloat::imDraw(murka, &TESTER2, {"slider 5"}, {20, 420, 220, 35});
 */
+//        MurkaViewInterface<MurkaSliderFloat>::Parameters pp;
+//        MurkaSliderFloat::imDrawST2(murka.currentContext, &TESTER2, pp, {20, 420, 220, 35});
     
-//    imDraw<MurkaSliderFloat>::imDraw
+//        imDraw<MurkaSliderFloat>({"slider 6"});
+//
+    murka.beginDrawingInView(&murka);
+    drawWidget<MurkaBlankPanel>(murka, {"panel6", true}, {750, 550, 260, 500});
+    murka.beginDrawingInLatestView();
+    drawWidget<MurkaSliderFloat>(murka, &TESTER, {"slider 8"}, {20, 120, 220, 50});
+    
+    murka.beginDrawingInView(&murka);
+    drawWidget<MurkaSliderFloat>(murka, &TESTER, {"slider 9"}, {20, 240, 220, 50});
 
 }
 
