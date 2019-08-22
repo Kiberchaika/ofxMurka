@@ -37,4 +37,8 @@ class ofApp : public ofBaseApp {
     
     
     float TESTER, TESTER2;
+
+    std::vector<float> testArray = {0, 0.3, 0.7, 3};
+    std::string testString = "test";
+    bool testBool = false;
 };
