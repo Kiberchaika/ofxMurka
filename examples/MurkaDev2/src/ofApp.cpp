@@ -3,6 +3,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+    // Murka setup
+    
+    murka.setupFonts("Roboto-Regular.ttf", 12,
+                     "Roboto-Regular.ttf", 20);
+    
+    //
     
     panel1 = murka.addChildToViewT(new MurkaBlankPanel(),
                                    NULL,
@@ -30,7 +36,6 @@ void ofApp::setup(){
                                            0.5,
                                            1.0});
     
-//    testArray.resize(16);
 }
 
 //--------------------------------------------------------------
@@ -62,18 +67,39 @@ void ofApp::draw(){
     ///////////////// Immediate mode
 
     murka.beginDrawingInView(&murka);
-    drawWidget<MurkaBlankPanel>(murka, {"panel2", true}, {350, 50, 260, 500});
-
+    drawWidget<MurkaBlankPanel>(murka, {"", true}, {350, 50, 260, 500});
+    
+    auto panelShape = murka.getLatestChildShape();
 
     murka.beginDrawingInLatestView();
-    drawWidget<MurkaSliderFloat>(murka, &(*testArray.begin()), {"slider 2"}, {20, 120, 220, 35});
-    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, 220, 35});
-    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, 220, 35});
-    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 3)), {"slider 5"}, {20, 240, 220, 35});
+    drawWidget<MurkaSliderFloat>(murka, &(*testArray.begin()), {"slider 2"}, {20, 120, panelShape.size.x - 40, 35});
+    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, panelShape.size.x - 40, 35});
+    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, panelShape.size.x - 40, 35});
+    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 3)), {"slider 5"}, {20, 240, panelShape.size.x - 40, 35});
 
-    if (drawWidget<MurkaWidgetButton>(murka, {"button 1"}, {20, 280, 220, 35})) {
+    if (drawWidget<MurkaWidgetButton>(murka, {"button 1"}, {20, 280, panelShape.size.x - 40, 35})) {
         ofLog() << "it worked " << ofRandom(255);
     }
+    
+    drawWidget<MurkaPlainTextField>(murka, &testString, false, {20, 330, panelShape.size.x - 40, 35});
+    
+    return;
+    
+    
+    ofClear(0);
+    
+    ofSetColor(255, 0, 0);
+    ofDrawLine(200, 0, 0, 200);
+    
+    ofSetColor(255);
+    ofPushView();
+    auto vport = ofGetCurrentViewport();
+    ofViewport(ofRectangle(0, 0, 200, 200));
+    ofScale((vport.getWidth() / 200.), (vport.getHeight() / 200.));
+    ofDrawLine(0, 0, 200, 200);
+    ofPopView();
+    
+    ofDrawBitmapStringHighlight("LALALA", 200, 200);
 }
 
 //--------------------------------------------------------------
