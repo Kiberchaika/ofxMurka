@@ -34,11 +34,12 @@ class ofApp : public ofBaseApp {
         MurkaViewHandler<MurkaWidgetButton>*  b2;
         MurkaViewHandler<MurkaSliderFloat>*  slider1;
         MurkaViewHandler<MurkaBlankPanel>* panel1;
+        MurkaViewHandler<MurkaPlainTextField>* textField1;
     
     
     float TESTER, TESTER2;
 
     std::vector<float> testArray = {0, 0.3, 0.7, 3};
-    std::string testString = "test";
+    std::string testString = "This is a text field!";
     bool testBool = false;
 };

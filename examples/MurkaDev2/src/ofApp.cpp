@@ -10,26 +10,31 @@ void ofApp::setup(){
     
     //
     
-    panel1 = murka.addChildToViewT(new MurkaBlankPanel(),
+    panel1 = murka.addChildToView(new MurkaBlankPanel(),
                                    NULL,
                                    {"panel1", true},
                                    {50, 50, 260, 500});
     
     
-    b1 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
+    b1 = murka.addChildToView(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
                                {"button1"},
                                {20, 120, 100, 35});
 
-    b2 = murka.addChildToViewT(panel1, new MurkaWidgetButton(),
+    b2 = murka.addChildToView(panel1, new MurkaWidgetButton(),
                                NULL, // the data it controls
                                {120, 120, 120, "button2"},
                                {140, 120, 100, 35});
     
-    slider1 = murka.addChildToViewT(panel1, new MurkaSliderFloat(),
+    slider1 = murka.addChildToView(panel1, new MurkaSliderFloat(),
                                     &(*testArray.begin()),
                                     {0, 1, "slider 1"},
                                     {20, 220, 220, 35});
+    
+    textField1 = murka.addChildToView(panel1, new MurkaPlainTextField(),
+                                       &testString,
+                                       {},
+                                       {20, 270, 220, 35});
     
     MurkaView v;
     v.layoutGenerator.setLayoutStructure({{30, RIGHT},
@@ -51,12 +56,9 @@ void ofApp::draw(){
     
     auto time = ofGetElapsedTimef();
     
-//    panel1->shape.position = {100 + 50 * sin(time * 5), 50};
-    
-    
     b1->tParams->b = sin(time * 10) * 100 + 100;
     
-    
+    // Initial drawing and setup & object-oriented mode
 
     murka.drawCycle();
     
@@ -64,7 +66,7 @@ void ofApp::draw(){
     if (b2->getResults() == true) ofLog() << "button 2 true!";
     
 
-    ///////////////// Immediate mode
+    ///////////////// Immediate mode with custom widget sizes
 
     murka.beginDrawingInView(&murka);
     drawWidget<MurkaBlankPanel>(murka, {"", true}, {350, 50, 260, 500});
