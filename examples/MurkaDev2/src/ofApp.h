@@ -4,6 +4,7 @@
 //#include "ofxLiveApp.h"
 #include "ofxMurka.h"
 
+using namespace murka;
 
 class ofApp : public ofBaseApp {
 
@@ -28,13 +29,13 @@ class ofApp : public ofBaseApp {
 		
 		Murka murka;
 
-        MurkaWidgetButton b;
+        Button b;
     
-        MurkaViewHandler<MurkaWidgetButton>*  b1;
-        MurkaViewHandler<MurkaWidgetButton>*  b2;
-        MurkaViewHandler<MurkaSliderFloat>*  slider1;
-        MurkaViewHandler<MurkaBlankPanel>* panel1;
-        MurkaViewHandler<MurkaPlainTextField>* textField1;
+        MurkaViewHandler<Button>*  b1;
+        MurkaViewHandler<Button>*  b2;
+        MurkaViewHandler<SliderFloat>*  slider1;
+        MurkaViewHandler<BlankPanel>* panel1;
+        MurkaViewHandler<PlainTextField>* textField1;
     
     
     float TESTER, TESTER2;

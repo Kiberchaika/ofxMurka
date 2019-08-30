@@ -10,33 +10,33 @@ void ofApp::setup(){
     
     //
     
-    panel1 = murka.addChildToView(new MurkaBlankPanel(),
+    panel1 = murka.addChildToView(new BlankPanel(),
                                    NULL,
                                    {"panel1", true},
                                    {50, 50, 260, 500});
     
     
-    b1 = murka.addChildToView(panel1, new MurkaWidgetButton(),
+    b1 = murka.addChildToView(panel1, new Button(),
                                NULL, // the data it controls
                                {"button1"},
                                {20, 120, 100, 35});
 
-    b2 = murka.addChildToView(panel1, new MurkaWidgetButton(),
+    b2 = murka.addChildToView(panel1, new Button(),
                                NULL, // the data it controls
                                {120, 120, 120, "button2"},
                                {140, 120, 100, 35});
     
-    slider1 = murka.addChildToView(panel1, new MurkaSliderFloat(),
+    slider1 = murka.addChildToView(panel1, new SliderFloat(),
                                     &(*testArray.begin()),
                                     {0, 1, "slider 1"},
                                     {20, 220, 220, 35});
     
-    textField1 = murka.addChildToView(panel1, new MurkaPlainTextField(),
+    textField1 = murka.addChildToView(panel1, new PlainTextField(),
                                        &testString,
                                        {},
                                        {20, 270, 220, 35});
     
-    MurkaView v;
+    View v;
     v.layoutGenerator.setLayoutStructure({{30, RIGHT},
                                            0.5,
                                            1.0});
@@ -69,21 +69,21 @@ void ofApp::draw(){
     ///////////////// Immediate mode with custom widget sizes
 
     murka.beginDrawingInView(&murka);
-    drawWidget<MurkaBlankPanel>(murka, {"", true}, {350, 50, 260, 500});
+    drawWidget<BlankPanel>(murka, {"", true}, {350, 50, 260, 500});
     
     auto panelShape = murka.getLatestChildShape();
 
     murka.beginDrawingInLatestView();
-    drawWidget<MurkaSliderFloat>(murka, &(*testArray.begin()), {"slider 2"}, {20, 120, panelShape.size.x - 40, 35});
-    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, panelShape.size.x - 40, 35});
-    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, panelShape.size.x - 40, 35});
-    drawWidget<MurkaSliderFloat>(murka, &(*(testArray.begin() + 3)), {"slider 5"}, {20, 240, panelShape.size.x - 40, 35});
+    drawWidget<SliderFloat>(murka, &(*testArray.begin()), {"slider 2"}, {20, 120, panelShape.size.x - 40, 35});
+    drawWidget<SliderFloat>(murka, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, panelShape.size.x - 40, 35});
+    drawWidget<SliderFloat>(murka, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, panelShape.size.x - 40, 35});
+    drawWidget<SliderFloat>(murka, &(*(testArray.begin() + 3)), {"slider 5"}, {20, 240, panelShape.size.x - 40, 35});
 
-    if (drawWidget<MurkaWidgetButton>(murka, {"button 1"}, {20, 280, panelShape.size.x - 40, 35})) {
+    if (drawWidget<Button>(murka, {"button 1"}, {20, 280, panelShape.size.x - 40, 35})) {
         ofLog() << "it worked " << ofRandom(255);
     }
     
-    drawWidget<MurkaPlainTextField>(murka, &testString, false, {20, 330, panelShape.size.x - 40, 35});
+    drawWidget<PlainTextField>(murka, &testString, false, {20, 330, panelShape.size.x - 40, 35});
     
     return;
     
