@@ -6,7 +6,8 @@ void ofApp::setup(){
     // Murka setup
     
     murka.setupFonts("Roboto-Regular.ttf", 12,
-                     "Roboto-Regular.ttf", 20);
+                     "Roboto-Regular.ttf", 20,
+                     "CamingoCode-Regular.ttf", 12);
     
     //
     
@@ -14,7 +15,6 @@ void ofApp::setup(){
                                    NULL,
                                    {"panel1", true},
                                    {50, 50, 260, 500});
-    
     
     b1 = murka.addChildToView(panel1, new Button(),
                                NULL, // the data it controls
@@ -36,10 +36,26 @@ void ofApp::setup(){
                                        {},
                                        {20, 270, 220, 35});
     
+    // TODO: there is a weird bug that makes these two widgets a part of the panel
+    // even though they're added to the core murka view.
+    header1 = murka.addChildToView(/*panel1, */ new Header(),
+                                   NULL,
+                                   {"OOP Mode"},
+                                   {10, 5, 260, 50});
+    
+    label1 = murka.addChildToView(/*panel1, */ new Label(),
+                                  NULL,
+                                  {"Manually created widget graph"},
+                                  {10, 55, 260, 50});
+    
+/*
+    
     View v;
     v.layoutGenerator.setLayoutStructure({{30, RIGHT},
                                            0.5,
                                            1.0});
+     */
+    
     
 }
 
@@ -66,42 +82,41 @@ void ofApp::draw(){
     if (b2->getResults() == true) ofLog() << "button 2 true!";
     
 
-    ///////////////// Immediate mode with custom widget sizes
+    ///////////////// Immediate mode with manual layout
 
     murka.beginDrawingInView(&murka);
-    drawWidget<BlankPanel>(murka, {"", true}, {350, 50, 260, 500});
+    drawWidget<BlankPanel>(murka, {"", booleanTest}, {350, 50, 260, 500});
     
-    auto panelShape = murka.getLatestChildShape();
+    
+    auto panelShape = murka.getLatestChildShape(); // going to use this to resize widgets manually
 
     murka.beginDrawingInLatestView();
+    
+    drawWidget<Header>(murka, {"IM Mode"}, {20, 5,  panelShape.size.x - 40, 35});
+
+    drawWidget<Label>(murka, {"Manual IM mode layout"}, {20, 55,  panelShape.size.x - 40, 35});
+    drawWidget<Checkbox>(murka, &booleanTest, {"Moveable panel"}, {20, 85, panelShape.size.x - 40, 35});
+    
     drawWidget<SliderFloat>(murka, &(*testArray.begin()), {"slider 2"}, {20, 120, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(murka, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(murka, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(murka, &(*(testArray.begin() + 3)), {"slider 5"}, {20, 240, panelShape.size.x - 40, 35});
 
-    if (drawWidget<Button>(murka, {"button 1"}, {20, 280, panelShape.size.x - 40, 35})) {
-        ofLog() << "it worked " << ofRandom(255);
-    }
-    
+    drawWidget<Button>(murka, {"button 1"}, {20, 280, panelShape.size.x - 40, 35});
+
     drawWidget<PlainTextField>(murka, &testString, false, {20, 330, panelShape.size.x - 40, 35});
     
-    return;
+    drawWidget<DraggableNumberEditor>(murka, &numberEditorTest, {4, 800.0, 8000.0}, {20, 420, panelShape.size.x - 40, 35});
     
     
-    ofClear(0);
+    ///////////////// Immediate mode with automatic layout
     
-    ofSetColor(255, 0, 0);
-    ofDrawLine(200, 0, 0, 200);
     
-    ofSetColor(255);
-    ofPushView();
-    auto vport = ofGetCurrentViewport();
-    ofViewport(ofRectangle(0, 0, 200, 200));
-    ofScale((vport.getWidth() / 200.), (vport.getHeight() / 200.));
-    ofDrawLine(0, 0, 200, 200);
-    ofPopView();
+    murka.beginDrawingInView(&murka);
+    drawWidget<BlankPanel>(murka, {}, {650, 50, 260, 500});
+    murka.beginDrawingInLatestView();
+    drawWidget<Header>(murka, {"IM Autolayout"}, {20, 5,  260, 35});
     
-    ofDrawBitmapStringHighlight("LALALA", 200, 200);
 }
 
 //--------------------------------------------------------------

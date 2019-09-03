@@ -36,6 +36,8 @@ class ofApp : public ofBaseApp {
         MurkaViewHandler<SliderFloat>*  slider1;
         MurkaViewHandler<BlankPanel>* panel1;
         MurkaViewHandler<PlainTextField>* textField1;
+        MurkaViewHandler<Header>* header1;
+        MurkaViewHandler<Label>* label1;
     
     
     float TESTER, TESTER2;
@@ -43,4 +45,8 @@ class ofApp : public ofBaseApp {
     std::vector<float> testArray = {0, 0.3, 0.7, 3};
     std::string testString = "This is a text field!";
     bool testBool = false;
+    
+    double numberEditorTest = 2000;
+    
+    bool booleanTest = true;
 };
