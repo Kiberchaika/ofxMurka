@@ -32,13 +32,17 @@ public:
             }
             
             layoutGenerator.setLayoutStructure({0.5, {30, ALIGN_RIGHT}});
-            drawWidget<Label>(context, {!inside? "Try hovering!" : "See??"});
             
+            context.transformTheRenderBackFromThisContextShape();
+            drawWidget<Label>(context, {!inside? "Try hovering!" : "See??"});
+
             if (inside) {
                 if (drawWidget<Button>(context, {"?"})) {
                     ofLog() << "woah this works";
                 }
             }
+
+            context.transformTheRenderIntoThisContextShape();
         };
     }
     
@@ -58,8 +62,8 @@ public:
     
     // The two functions needed for optional UI state saving. It's up to you
     // to use those.
-    std::vector<MurkaVar> saveInternalData(int indexX, int indexY) override { }
-    void loadInternalData(std::vector<MurkaVar>) override {}
+//    std::vector<MurkaVar> saveInternalData(int indexX, int indexY) override { }
+//    void loadInternalData(std::vector<MurkaVar>) override {}
     
     
     // Everything else in the class is for handling the internal state. It persist.
