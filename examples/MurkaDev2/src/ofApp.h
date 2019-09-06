@@ -5,9 +5,11 @@
 #include "ofxMurka.h"
 
 #include "NestedViewTest.h"
+#include "MurkaTestWidgets.h"
 
 using namespace murka;
 
+ 
 class ofApp : public ofBaseApp {
 
 	public:
@@ -33,6 +35,7 @@ class ofApp : public ofBaseApp {
 
         Button b;
     
+		MurkaViewHandler<RadioButtonGroup>*  rb;
         MurkaViewHandler<Button>*  b1;
         MurkaViewHandler<Button>*  b2;
         MurkaViewHandler<SliderFloat>*  slider1;
@@ -44,6 +47,7 @@ class ofApp : public ofBaseApp {
     
     float TESTER, TESTER2;
 
+	int radioRata = -1;
     std::vector<float> testArray = {0, 0.3, 0.7, 3};
     std::string testString = "This is a text field!";
     bool testBool = false;

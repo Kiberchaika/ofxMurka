@@ -16,28 +16,38 @@ void ofApp::setup(){
                                    {"panel1", true},
                                    {350, 50, 260, 500});
     
-    b1 = m.addChildToView(panel1, new Button(),
+	rb = m.addChildToView(panel1, new RadioButtonGroup(),
+		&radioRata, // the data it controls
+		{ { "test1", "test2" } },
+		{ 20, 120, 100, 100 });
+	
+	b1 = m.addChildToView(panel1, new Button(),
                                NULL, // the data it controls
                                {"button1"},
-                               {20, 120, 100, 35});
+                               {20, 220, 100, 35});
 
     b2 = m.addChildToView(panel1, new Button(),
                                NULL, // the data it controls
-                               {120, 120, 120, "button2"},
-                               {140, 120, 100, 35});
+                               {120, 220, 120, "button2"},
+                               {140, 220, 100, 35});
     
     slider1 = m.addChildToView(panel1, new SliderFloat(),
                                     &(*testArray.begin()),
                                     {0, 1, "slider 1"},
-                                    {20, 220, 220, 35});
+                                    {20, 320, 220, 35});
     
     textField1 = m.addChildToView(panel1, new PlainTextField(),
                                        &testString,
                                        {},
-                                       {20, 270, 220, 35});
+                                       {20, 370, 220, 35});
     
     // TODO: there is a weird bug that makes these two widgets a part of the panel
     // even though they're added to the core murka view.
+	Header::Parameters p;
+	p.label = "OOP Mode";
+
+	auto o = { "OOP Mode" };
+
     header1 = m.addChildToView(/*panel1, */ new Header(),
                                    NULL,
                                    {"OOP Mode"},
