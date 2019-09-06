@@ -25,6 +25,7 @@ public:
 
 			isWantsClicks = false;
 
+			ofPushStyle();
 			for (size_t i = 0; i < params->labels.size(); i++) {
 				ofPushMatrix();
 				ofTranslate(0, i*params->elementSize);
@@ -46,7 +47,6 @@ public:
 				}
 				if (active) isWantsClicks = true;
 
-				ofPushStyle();
 				ofFill();
 				if (*data == i) {
 					ofSetColor(45);
@@ -58,11 +58,12 @@ public:
 					ofSetColor(10);
 				}
 				ofDrawRectangle(1, 1, params->elementSize - 2, params->elementSize - 2);
-				ofPopStyle();
-
+				ofSetColor(255);
 				ofDrawBitmapString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
+
 				ofPopMatrix();
 			}
+			ofPopStyle();
 
 			// Your drawing and interaction code goes here.
 			// Don't forget that all of this executes at each frame for each

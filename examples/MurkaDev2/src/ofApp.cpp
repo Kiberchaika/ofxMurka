@@ -70,7 +70,6 @@ void ofApp::draw(){
     
 	ofClear(10);
     
-    ofSetColor(255, 0, 0);
     
     auto time = ofGetElapsedTimef();
     
@@ -104,6 +103,9 @@ void ofApp::draw(){
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 3)), {"slider 5"}, {20, 240, panelShape.size.x - 40, 35});
 
+
+
+
     if (drawWidget<Button>(m, {"im button"}, {20, 280, panelShape.size.x - 40, 35})) {
         ofLog() << "im button pressed";
     }
@@ -112,6 +114,9 @@ void ofApp::draw(){
     
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0}, {20, 420, panelShape.size.x - 40, 35});
     
+	drawWidget< RadioButtonGroup>(m, &radioRata, { { "test1", "test2" } }, { 20, 520, 100, 100 });
+
+
     
     ///////////////// Immediate mode with automatic layout
     
