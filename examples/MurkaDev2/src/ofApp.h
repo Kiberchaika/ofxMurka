@@ -4,6 +4,8 @@
 //#include "ofxLiveApp.h"
 #include "ofxMurka.h"
 
+#include "NestedViewTest.h"
+
 using namespace murka;
 
 class ofApp : public ofBaseApp {
@@ -49,4 +51,6 @@ class ofApp : public ofBaseApp {
     double numberEditorTest = 2000;
     
     bool booleanTest = true;
+    
+    std::vector<std::pair<float, float>> pointsTest;
 };

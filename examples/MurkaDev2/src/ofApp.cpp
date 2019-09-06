@@ -14,7 +14,7 @@ void ofApp::setup(){
     panel1 = m.addChildToView(new BlankPanel(),
                                    NULL,
                                    {"panel1", true},
-                                   {50, 50, 260, 500});
+                                   {350, 50, 260, 500});
     
     b1 = m.addChildToView(panel1, new Button(),
                                NULL, // the data it controls
@@ -48,14 +48,6 @@ void ofApp::setup(){
                                   {"Manually created widget graph"},
                                   {10, 55, 260, 50});
     
-/*
-    
-    View v;
-    v.layoutGenerator.setLayoutStructure({{30, RIGHT},
-                                           0.5,
-                                           1.0});
-     */
-    
     
 }
 
@@ -85,7 +77,7 @@ void ofApp::draw(){
     ///////////////// Immediate mode with manual layout
 
     m.beginDrawingInView(&m);
-    drawWidget<BlankPanel>(m, {"", booleanTest}, {350, 50, 260, 500});
+    drawWidget<BlankPanel>(m, {"", booleanTest}, {650, 50, 260, 500});
     
     
     auto panelShape = m.getLatestChildShape(); // going to use this to resize widgets manually
@@ -115,15 +107,17 @@ void ofApp::draw(){
     
     
     m.beginDrawingInView(&m);
-    drawWidget<BlankPanel>(m, {"", true, 261, 400}, {650, 50, 261, 501});
+    drawWidget<BlankPanel>(m, {"", true, 261, 400}, {50, 50, 261, 551});
     
     m.beginDrawingInLatestView();
+    
     drawWidget<Header>(m, {"IM Autolayout"}, {20, 5,  260, 35});
     
     m.setLayoutLinearOffset(60); // This is a current offset from the top.
                                  // You can set it manually at any time if you need
                                  // to use custom layout for parts of the UI and
                                  // the auto layout for the rest of it.
+    
     
     m.setCurrentLayoutStructure({{100, ALIGN_LEFT}, 1.0});
     drawWidget<SliderFloat>(m, &(*testArray.begin()), {"s1"});
@@ -152,6 +146,9 @@ void ofApp::draw(){
     if (drawWidget<Button>(m, {"autolayout im button"})) {
         ofLog() << "autolayout im button pressed";
     }
+
+    m.setLayoutLineHeight(200);
+    drawWidget<NestedViewTest>(m, &pointsTest, {});
 
 }
 
