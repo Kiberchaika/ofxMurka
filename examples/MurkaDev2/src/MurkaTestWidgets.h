@@ -49,7 +49,7 @@ public:
 
 				ofFill();
 				if (*data == i) {
-					ofSetColor(45);
+					ofSetColor(105);
 				}
 				else if (active) {
 					ofSetColor(15);
