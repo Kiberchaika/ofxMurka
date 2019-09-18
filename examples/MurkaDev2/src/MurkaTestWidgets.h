@@ -25,6 +25,8 @@ public:
 
 			isWantsClicks = false;
 
+            auto font = context.getMonospaceFont();
+
 			ofPushStyle();
 			for (size_t i = 0; i < params->labels.size(); i++) {
 				ofPushMatrix();
@@ -59,7 +61,8 @@ public:
 				}
 				ofDrawRectangle(1, 1, params->elementSize - 2, params->elementSize - 2);
 				ofSetColor(255);
-				ofDrawBitmapString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
+//                ofDrawBitmapString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
+                font->drawString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
 
 				ofPopMatrix();
 			}
