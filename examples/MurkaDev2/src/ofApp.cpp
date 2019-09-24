@@ -110,7 +110,7 @@ void ofApp::draw(){
         ofLog() << "im button pressed";
     }
 
-    drawWidget<PlainTextField>(m, &testString, false, {20, 330, panelShape.size.x - 40, 35});
+    drawWidget<PlainTextField>(m, &testString, {}, {20, 330, panelShape.size.x - 40, 35});
     
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0}, {20, 420, panelShape.size.x - 40, 35});
     
@@ -153,7 +153,7 @@ void ofApp::draw(){
     m.setLayoutLineHeight(35);
 
     m.setCurrentLayoutStructure({1.0});
-    drawWidget<PlainTextField>(m, &testString, false);
+    drawWidget<PlainTextField>(m, &testString, {});
     
     m.setCurrentLayoutStructure({1.0});
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0});
