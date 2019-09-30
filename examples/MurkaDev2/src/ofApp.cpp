@@ -111,7 +111,6 @@ void ofApp::draw(){
     }
 
     drawWidget<PlainTextField>(m, &testString, {}, {20, 330, panelShape.size.x - 40, 35});
-
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0}, {20, 420, panelShape.size.x - 40, 35});
 
 	drawWidget<RadioButtonGroup>(m, &radioRata, { { "test1", "test2" } }, { 20, 520, 100, 100 });
@@ -154,7 +153,6 @@ void ofApp::draw(){
 
     m.setCurrentLayoutStructure({1.0});
     drawWidget<PlainTextField>(m, &testString, {});
-
     m.setCurrentLayoutStructure({1.0});
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0});
 
