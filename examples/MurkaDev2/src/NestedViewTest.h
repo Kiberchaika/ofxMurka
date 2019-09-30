@@ -33,7 +33,6 @@ public:
             
             layoutGenerator.setLayoutStructure({0.5, {30, ALIGN_RIGHT}});
             
-            context.transformTheRenderBackFromThisContextShape();
             drawWidget<Label>(context, {!inside? "Try hovering!" : "See??"});
 
             if (inside) {
@@ -42,7 +41,13 @@ public:
                 }
             }
 
-            context.transformTheRenderIntoThisContextShape();
+            if (trueInside) {
+                context.addOverlay([&]() {
+                    drawWidget<Label>(context, {
+                        ofToString(context.mousePosition.x, 0) + ":" + ofToString(context.mousePosition.y, 0),
+                        {1., 1., 1.}, {0.,0.,0.,.5}}, {context.mousePosition.x, context.mousePosition.y, 75, 30});
+                }, this);
+            }
         };
     }
     

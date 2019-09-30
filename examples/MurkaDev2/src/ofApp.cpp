@@ -12,7 +12,7 @@ void ofApp::setup(){
     //
     
     panel1 = m.addChildToView(new BlankPanel(),
-                                   NULL,
+                                   nullptr,
                                    {"panel1", true},
                                    {350, 50, 260, 500});
     
@@ -22,12 +22,12 @@ void ofApp::setup(){
 		{ 20, 120, 100, 100 });
 	
 	b1 = m.addChildToView(panel1, new Button(),
-                               NULL, // the data it controls
+                               nullptr, // the data it controls
                                {"button1"},
                                {20, 220, 100, 35});
 
     b2 = m.addChildToView(panel1, new Button(),
-                               NULL, // the data it controls
+                               nullptr, // the data it controls
                                {120, 220, 120, "button2"},
                                {140, 220, 100, 35});
     
@@ -49,12 +49,12 @@ void ofApp::setup(){
 	auto o = { "OOP Mode" };
 
     header1 = m.addChildToView(/*panel1, */ new Header(),
-                                   NULL,
+                                   nullptr,
                                    {"OOP Mode"},
                                    {10, 5, 260, 50});
     
     label1 = m.addChildToView(/*panel1, */ new Label(),
-                                  NULL,
+                                  nullptr,
                                   {"Manually created widget graph"},
                                   {10, 55, 260, 50});
     
@@ -77,7 +77,7 @@ void ofApp::draw(){
     
     // Initial drawing and setup & object-oriented mode
 
-    m.drawCycle();
+    m.begin();
     
     if (b1->getResults() == true) ofLog() << "button 1 true!";
     if (b2->getResults() == true) ofLog() << "button 2 true!";
@@ -92,12 +92,12 @@ void ofApp::draw(){
     auto panelShape = m.getLatestChildShape(); // going to use this to resize widgets manually
 
     m.beginDrawingInLatestView();
-    
-    drawWidget<Header>(m, {"IM Mode"}, {20, 5,  panelShape.size.x - 40, 35});
+
+    drawWidget<Header>(m, {"IM Mode"}, {20, 5,  panelShape.size.x - 40, 45});
 
     drawWidget<Label>(m, {"Manual IM mode layout"}, {20, 55,  panelShape.size.x - 40, 35});
     drawWidget<Checkbox>(m, &booleanTest, {"Moveable panel"}, {20, 85, panelShape.size.x - 40, 35});
-    
+
     drawWidget<SliderFloat>(m, &(*testArray.begin()), {"slider 2"}, {20, 120, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 2)), {"slider 4"}, {20, 200, panelShape.size.x - 40, 35});
@@ -110,34 +110,34 @@ void ofApp::draw(){
         ofLog() << "im button pressed";
     }
 
-    drawWidget<PlainTextField>(m, &testString, false, {20, 330, panelShape.size.x - 40, 35});
-    
+    drawWidget<PlainTextField>(m, &testString, {}, {20, 330, panelShape.size.x - 40, 35});
+
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0}, {20, 420, panelShape.size.x - 40, 35});
-    
+
 	drawWidget<RadioButtonGroup>(m, &radioRata, { { "test1", "test2" } }, { 20, 520, 100, 100 });
 
 
-    
+
     ///////////////// Immediate mode with automatic layout
-    
-    
+
+
     m.beginDrawingInView(&m);
-    drawWidget<BlankPanel>(m, {"", true, 261, 400}, {50, 50, 261, 551});
-    
+    drawWidget<BlankPanel>(m, {"", true, 261, 400}, {50, 50, 261, 651});
+
     m.beginDrawingInLatestView();
-    
-    drawWidget<Header>(m, {"IM Autolayout"}, {20, 5,  260, 35});
-    
+
+    drawWidget<Header>(m, {"IM Autolayout"}, {20, 5,  260, 45});
+
     m.setLayoutLinearOffset(60); // This is a current offset from the top.
                                  // You can set it manually at any time if you need
                                  // to use custom layout for parts of the UI and
                                  // the auto layout for the rest of it.
-    
-    
+
+
     m.setCurrentLayoutStructure({{100, ALIGN_LEFT}, 1.0});
     drawWidget<SliderFloat>(m, &(*testArray.begin()), {"s1"});
     drawWidget<Label>(m, {"100 pix wide slider", TEXT_CENTER});
-    
+
     m.setCurrentLayoutStructure({{0.5, ALIGN_LEFT}, 1.0});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 1)), {"s2"});
     drawWidget<Label>(m, {"0.5 wide slider", TEXT_CENTER});
@@ -149,12 +149,12 @@ void ofApp::draw(){
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 1)), {"1"});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 2)), {"2"});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 3)), {"3"});
-    
+
     m.setLayoutLineHeight(35);
 
     m.setCurrentLayoutStructure({1.0});
-    drawWidget<PlainTextField>(m, &testString, false);
-    
+    drawWidget<PlainTextField>(m, &testString, {});
+
     m.setCurrentLayoutStructure({1.0});
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0});
 
@@ -162,8 +162,19 @@ void ofApp::draw(){
         ofLog() << "autolayout im button pressed";
     }
 
+    m.setCurrentLayoutStructure({150, 1.0});
+    drawWidget<Label>(m, {"Float text field", TEXT_CENTER});
+    drawWidget<PlainTextField>(m, &(*testArray.begin()), {3, 0, 1});
+
+    m.setCurrentLayoutStructure({1.0});
+    drawWidget<Label>(m, {"Colored text label", {1., 0.5, 0.5}, {0., 1., 1., 0.1}});
+
+
+    m.setCurrentLayoutStructure({1.0});
     m.setLayoutLineHeight(200);
     drawWidget<NestedViewTest>(m, &pointsTest, {});
+    
+    m.end();
 
 }
 
