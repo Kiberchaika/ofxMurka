@@ -19,7 +19,7 @@ public:
             auto data = (std::vector<std::pair<float, float>>*)dataToControl;
             
             bool inside = context.isHovered();
-            bool trueInside = context.isHovered() * !areChildrenHovered(context);
+            bool trueInside = context.isHovered() * !areInteractiveChildrenHovered(context);
             
             
             ofSetColor(200);
@@ -44,8 +44,10 @@ public:
             if (trueInside) {
                 context.addOverlay([&]() {
                     drawWidget<Label>(context, {
-                        ofToString(context.mousePosition.x, 0) + ":" + ofToString(context.mousePosition.y, 0),
-                        {1., 1., 1.}, {0.,0.,0.,.5}}, {context.mousePosition.x, context.mousePosition.y, 75, 30});
+                        ofToString(context.mousePosition.x, 0) + ":" + ofToString(context.mousePosition.y, 0) + '\n' + "hey",
+                        {1., 1., 1.}, {0.,0.,0.,.5}},
+                        {context.mousePosition.x,
+                         context.mousePosition.y + 20, 75, 30});
                 }, this);
             }
         };
