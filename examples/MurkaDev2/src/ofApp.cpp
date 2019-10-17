@@ -5,23 +5,32 @@ void ofApp::setup(){
 
     // Murka setup
     
-    m.setupFonts("Roboto-Regular.ttf", 12,
-                     "Roboto-Regular.ttf", 20,
-                     "CamingoCode-Regular.ttf", 12);
+    m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
+                 "Roboto-Regular.ttf", 20 * uiScale,
+                 "CamingoCode-Regular.ttf", 12 * uiScale);
     
     //
+    
+    m.setUIScale(uiScale);
+
+    createChildren();
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::createChildren(){
     
     panel1 = m.addChildToView(new BlankPanel(),
                                    nullptr,
                                    {"panel1", true},
-                                   {350, 50, 260, 500});
+                                   {0, 0, 260, 500});
     
-	rb = m.addChildToView(panel1, new RadioButtonGroup(),
-		&radioRata, // the data it controls
-		{ { "test1", "test2" } },
-		{ 20, 120, 100, 100 });
-	
-	b1 = m.addChildToView(panel1, new Button(),
+    rb = m.addChildToView(panel1, new RadioButtonGroup(),
+        &radioRata, // the data it controls
+        { { "test1", "test2" } },
+        { 20, 120, 100, 100 });
+    
+    b1 = m.addChildToView(panel1, new Button(),
                                nullptr, // the data it controls
                                {"button1"},
                                {20, 220, 100, 35});
@@ -43,10 +52,10 @@ void ofApp::setup(){
     
     // TODO: there is a weird bug that makes these two widgets a part of the panel
     // even though they're added to the core murka view.
-	Header::Parameters p;
-	p.label = "OOP Mode";
+    Header::Parameters p;
+    p.label = "OOP Mode";
 
-	auto o = { "OOP Mode" };
+    auto o = { "OOP Mode" };
 
     header1 = m.addChildToView(/*panel1, */ new Header(),
                                    nullptr,
@@ -57,8 +66,6 @@ void ofApp::setup(){
                                   nullptr,
                                   {"Manually created widget graph"},
                                   {10, 55, 260, 50});
-    
-    
 }
 
 //--------------------------------------------------------------
@@ -79,6 +86,23 @@ void ofApp::draw(){
 
     m.begin();
     
+    /*
+    
+    m.beginDrawingInView(&m);
+    if (drawWidget<SliderFloat>(m, &uiScale, {0.5, 2.5, "UI Scale"}, {20, 20, 175, 35})) {
+        ofLog() << "uiScale changed";
+        m.setUIScale(uiScale);
+        
+        m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
+                     "Roboto-Regular.ttf", 20 * uiScale,
+                     "CamingoCode-Regular.ttf", 12 * uiScale);
+        
+        m.clearChildren();
+        
+        createChildren();
+
+    }
+    
     if (b1->getResults() == true) ofLog() << "button 1 true!";
     if (b2->getResults() == true) ofLog() << "button 2 true!";
     
@@ -89,7 +113,7 @@ void ofApp::draw(){
     drawWidget<BlankPanel>(m, {"", booleanTest}, {650, 50, 260, 500});
     
     
-    auto panelShape = m.getLatestChildShape(); // going to use this to resize widgets manually
+    auto panelShape = m.getLatestChildShape() / m.getUIScale(); // going to use this to resize widgets manually
 
     m.beginDrawingInLatestView();
 
@@ -127,10 +151,10 @@ void ofApp::draw(){
 
     drawWidget<Header>(m, {"IM Autolayout"}, {20, 5,  260, 45});
 
-    m.setLayoutLinearOffset(60); // This is a current offset from the top.
-                                 // You can set it manually at any time if you need
-                                 // to use custom layout for parts of the UI and
-                                 // the auto layout for the rest of it.
+    m.setLayoutLinearOffset(60 * m.getUIScale()); // This is a current offset from the top.
+                                                  // You can set it manually at any time if you need
+                                                  // to use custom layout for parts of the UI and
+                                                  // the auto layout for the rest of it.
 
 
     m.setCurrentLayoutStructure({{100, ALIGN_LEFT}, 1.0});
@@ -171,6 +195,8 @@ void ofApp::draw(){
     m.setCurrentLayoutStructure({1.0});
     m.setLayoutLineHeight(200);
     drawWidget<NestedViewTest>(m, &pointsTest, {});
+    
+     */
     
     m.end();
 

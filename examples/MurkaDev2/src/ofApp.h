@@ -30,6 +30,8 @@ class ofApp : public ofBaseApp {
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+        void createChildren();
 		
 		Murka m;
 
@@ -44,6 +46,7 @@ class ofApp : public ofBaseApp {
         MurkaViewHandler<Header>* header1;
         MurkaViewHandler<Label>* label1;
     
+    float uiScale = 2;
     
     float TESTER, TESTER2;
 
