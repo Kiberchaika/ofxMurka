@@ -23,7 +23,7 @@ void ofApp::createChildren(){
     panel1 = m.addChildToView(new BlankPanel(),
                                    nullptr,
                                    {"panel1", true},
-                                   {0, 0, 260, 500});
+                                   {350, 50, 260, 500});
     
     rb = m.addChildToView(panel1, new RadioButtonGroup(),
         &radioRata, // the data it controls
@@ -86,7 +86,7 @@ void ofApp::draw(){
 
     m.begin();
     
-    /*
+    
     
     m.beginDrawingInView(&m);
     if (drawWidget<SliderFloat>(m, &uiScale, {0.5, 2.5, "UI Scale"}, {20, 20, 175, 35})) {
@@ -196,7 +196,7 @@ void ofApp::draw(){
     m.setLayoutLineHeight(200);
     drawWidget<NestedViewTest>(m, &pointsTest, {});
     
-     */
+     
     
     m.end();
 

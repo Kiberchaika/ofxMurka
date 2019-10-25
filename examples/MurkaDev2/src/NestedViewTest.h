@@ -31,6 +31,7 @@ public:
                 ofDrawLine(0, j * gridsize, shape.size.x, j * gridsize);
             }
             
+            layoutGenerator.setLayoutLineHeight(30);
             layoutGenerator.setLayoutStructure({0.5, {30, ALIGN_RIGHT}});
             
             drawWidget<Label>(context, {!inside? "Try hovering!" : "See??"});
@@ -44,10 +45,12 @@ public:
             if (trueInside) {
                 context.addOverlay([&]() {
                     drawWidget<Label>(context, {
-                        ofToString(context.mousePosition.x, 0) + ":" + ofToString(context.mousePosition.y, 0) + '\n' + "hey",
+                        ofToString(context.mousePosition.x, 0) + ":" + ofToString(context.mousePosition.y, 0),
                         {1., 1., 1.}, {0.,0.,0.,.5}},
-                        {context.mousePosition.x,
-                         context.mousePosition.y + 20, 75, 30});
+                        {context.mousePosition.x / context.getUIScale(),
+                         context.mousePosition.y / context.getUIScale() + 20 / context.getUIScale(),
+                        75 * context.getUIScale(),
+                        30 * context.getUIScale()});
                 }, this);
             }
         };

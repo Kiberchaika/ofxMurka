@@ -46,7 +46,7 @@ class ofApp : public ofBaseApp {
         MurkaViewHandler<Header>* header1;
         MurkaViewHandler<Label>* label1;
     
-    float uiScale = 2;
+    float uiScale = 1.2;
     
     float TESTER, TESTER2;
 
