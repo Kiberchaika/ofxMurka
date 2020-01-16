@@ -1,5 +1,9 @@
 #pragma once
 
+//
+//  Murka Surface example header file
+//
+
 #include "ofMain.h"
 #include "ofxMurka.h"
 #include "MurkaSurface.h"
