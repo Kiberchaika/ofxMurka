@@ -42,6 +42,14 @@ public:
                 }
             }
 
+            if (drawWidget<Button>(context, {"Dynamic button 1"}, {100 * sin(ofGetElapsedTimef() * 3), 100 * sin(ofGetElapsedTimef() * 2), 150, 75})) {
+                ofLog() << "woah this works";
+            }
+
+            if (drawWidget<Button>(context, {"Dynamic button 2"}, {100 * sin(ofGetElapsedTimef() * 3) + context.getSize().x - 100, 100 * sin(ofGetElapsedTimef() * 2) + context.getSize().y - 100, 150, 75})) {
+                ofLog() << "woah this works";
+            }
+
             if (trueInside) {
                 context.addOverlay([&]() {
                     drawWidget<Label>(context, {
