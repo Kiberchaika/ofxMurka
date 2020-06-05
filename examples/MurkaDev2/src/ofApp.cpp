@@ -177,6 +177,10 @@ void ofApp::draw(){
 
     m.setCurrentLayoutStructure({1.0});
     drawWidget<PlainTextField>(m, &testString, {});
+    if (getLatestDrawnWidget<PlainTextField>(m)->activated) {
+        ofLog() << "woah activated!!";
+    }
+    
     m.setCurrentLayoutStructure({1.0});
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0});
 

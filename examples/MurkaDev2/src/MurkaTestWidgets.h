@@ -9,70 +9,66 @@ class RadioButtonGroup : public MurkaViewInterface<RadioButtonGroup> {
 
 public:
 	RadioButtonGroup() {
+    }
 
-		draw = [&](void* dataToControl,
-			void* parametersObject,
-			void* thisWidgetObject,
-			const MurkaContext & context,
-			void* resultObject) {
+    MURKA_VIEW_DRAW_FUNCTION {
 
-			auto params = (Parameters*)parametersObject;
-			RadioButtonGroup* thisWidget = (RadioButtonGroup*)thisWidgetObject;
+        auto params = (Parameters*)parametersObject;
+        RadioButtonGroup* thisWidget = (RadioButtonGroup*)thisWidgetObject;
 
-			int* data = (int*)dataToControl;
+        int* data = (int*)dataToControl;
 
-			bool inside = context.isHovered() * !areChildrenHovered(context);
+        bool inside = context.isHovered() * !areChildrenHovered(context);
 
-			isWantsClicks = false;
+        isWantsClicks = false;
 
-            auto font = context.getMonospaceFont();
+        auto font = context.getMonospaceFont();
 
-			ofPushStyle();
-			for (size_t i = 0; i < params->labels.size(); i++) {
-				ofPushMatrix();
-				ofTranslate(0, i*params->elementSize);
+        ofPushStyle();
+        for (size_t i = 0; i < params->labels.size(); i++) {
+            ofPushMatrix();
+            ofTranslate(0, i*params->elementSize);
 
 
-				bool active = false;
-				if (inside) {
-					MurkaShape shape;
-					shape.position.x = 0;
-					shape.position.y = i * params->elementSize;
-					shape.size.x = params->elementSize;
-					shape.size.y = params->elementSize;
+            bool active = false;
+            if (inside) {
+                MurkaShape shape;
+                shape.position.x = 0;
+                shape.position.y = i * params->elementSize;
+                shape.size.x = params->elementSize;
+                shape.size.y = params->elementSize;
 
-					if (shape.inside(context.mousePosition)) {
-						active = true;
-						if (context.mouseDown) *data = i;
-					}
+                if (shape.inside(context.mousePosition)) {
+                    active = true;
+                    if (context.mouseDown) *data = i;
+                }
 
-				}
-				if (active) isWantsClicks = true;
+            }
+            if (active) isWantsClicks = true;
 
-				ofFill();
-				if (*data == i) {
-					ofSetColor(105);
-				}
-				else if (active) {
-					ofSetColor(15);
-				}
-				else {
-					ofSetColor(10);
-				}
-				ofDrawRectangle(1, 1, params->elementSize - 2, params->elementSize - 2);
-				ofSetColor(255);
+            ofFill();
+            if (*data == i) {
+                ofSetColor(105);
+            }
+            else if (active) {
+                ofSetColor(15);
+            }
+            else {
+                ofSetColor(10);
+            }
+            ofDrawRectangle(1, 1, params->elementSize - 2, params->elementSize - 2);
+            ofSetColor(255);
 //                ofDrawBitmapString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
-                font->drawString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
+            font->drawString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
 
-				ofPopMatrix();
-			}
-			ofPopStyle();
+            ofPopMatrix();
+        }
+        ofPopStyle();
 
-			// Your drawing and interaction code goes here.
-			// Don't forget that all of this executes at each frame for each
-			// widget that is drawn on screen.
-		};
-	}
+        // Your drawing and interaction code goes here.
+        // Don't forget that all of this executes at each frame for each
+        // widget that is drawn on screen.
+    };
 
 	// Here go parameters and any parameter convenience constructors. You need to define something called Parameters, even if it's NULL.
 	struct Parameters {
