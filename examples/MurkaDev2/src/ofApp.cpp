@@ -45,7 +45,7 @@ void ofApp::createChildren(){
                                     {0, 1, "slider 1"},
                                     {20, 320, 220, 35});
     
-    textField1 = m.addChildToView(panel1, new PlainTextField(),
+    textField1 = m.addChildToView(panel1, new TextField(),
                                        &testString,
                                        {},
                                        {20, 370, 220, 35});
@@ -134,7 +134,7 @@ void ofApp::draw(){
         ofLog() << "im button pressed";
     }
 
-    drawWidget<PlainTextField>(m, &testString, {}, {20, 330, panelShape.size.x - 40, 35});
+    drawWidget<TextField>(m, &testString, {}, {20, 330, panelShape.size.x - 40, 35});
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0}, {20, 420, panelShape.size.x - 40, 35});
 
 	drawWidget<RadioButtonGroup>(m, &radioRata, { { "test1", "test2" } }, { 20, 520, 100, 100 });
@@ -176,10 +176,15 @@ void ofApp::draw(){
     m.setLayoutLineHeight(35);
 
     m.setCurrentLayoutStructure({1.0});
-    drawWidget<PlainTextField>(m, &testString, {});
-    if (getLatestDrawnWidget<PlainTextField>(m)->activated) {
-        ofLog() << "woah activated!!";
+    drawWidget<TextField>(m, &testString, {});
+    if (getLatestDrawnWidget<TextField>(m)->activated) {
+        ofLog() << "text editing just got activated";
     }
+    
+    TextField::Parameters customTextEditorParameters;
+    customTextEditorParameters.activateByDoubleClickOnly = true;
+    customTextEditorParameters.hint = "this is hint";
+    drawWidget<TextField>(m, &doubleClickAndCommentTestString, customTextEditorParameters);
     
     m.setCurrentLayoutStructure({1.0});
     drawWidget<DraggableNumberEditor>(m, &numberEditorTest, {4, 800.0, 8000.0});
@@ -190,7 +195,7 @@ void ofApp::draw(){
 
     m.setCurrentLayoutStructure({150, 1.0});
     drawWidget<Label>(m, {"Float text field", TEXT_CENTER});
-    drawWidget<PlainTextField>(m, &(*testArray.begin()), {3, 0, 1});
+    drawWidget<TextField>(m, &(*testArray.begin()), {3, 0, 1});
 
     m.setCurrentLayoutStructure({1.0});
     drawWidget<Label>(m, {"Colored text label", {1., 0.5, 0.5}, {0., 1., 1., 0.1}});

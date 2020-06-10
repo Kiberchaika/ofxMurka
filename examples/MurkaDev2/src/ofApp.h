@@ -42,7 +42,7 @@ class ofApp : public ofBaseApp {
         MurkaViewHandler<Button>*  b2;
         MurkaViewHandler<SliderFloat>*  slider1;
         MurkaViewHandler<BlankPanel>* panel1;
-        MurkaViewHandler<PlainTextField>* textField1;
+        MurkaViewHandler<TextField>* textField1;
         MurkaViewHandler<Header>* header1;
         MurkaViewHandler<Label>* label1;
     
@@ -53,6 +53,7 @@ class ofApp : public ofBaseApp {
 	int radioRata = -1;
     std::vector<float> testArray = {0, 0.3, 0.7, 3};
     std::string testString = "This is a text field!";
+    std::string doubleClickAndCommentTestString = "";
     bool testBool = false;
     
     double numberEditorTest = 2000;
