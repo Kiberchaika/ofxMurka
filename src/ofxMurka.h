@@ -6,6 +6,7 @@
 #include "../libs/Murka/MurkaBasicWidgets.h"
 #include "../libs/Murka/DraggableNumberEditor.h"
 #include "../libs/Murka/TextField.h"
+#include "../libs/Murka/LambdaButton.h"
 
 #ifdef TARGET_OSX
 #include "mac/ofxMacTrackpad.h"
