@@ -2,7 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxMurka.h"
-#include "Pane.h"
+
+#include "TestSurface.h"
 
 class ofApp : public ofBaseApp{
 

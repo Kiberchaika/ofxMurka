@@ -9,6 +9,7 @@
 #include "../libs/Murka/LambdaButton.h"
 #include "../libs/Murka/LambdaPanel.h"
 #include "../libs/Murka/Pane.h"
+#include "../libs/Murka/ScrollBar.h"
 
 #ifdef TARGET_OSX
 #include "mac/ofxMacTrackpad.h"
