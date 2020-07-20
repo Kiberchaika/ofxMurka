@@ -30,12 +30,25 @@ public:
         
         // Then use .panOffset to transform view
         
+        int howManyLabelsDidWeDraw = 0;
         for (int i = 0; i < 100; i++) {
-            drawWidget<Label>(context, {"Label #" + std::to_string(i)},
-                              {0, 30 * i - panOffset.y,
-                              200, 30});
+            
+            MurkaShape labelShape = {0, 30 * i - panOffset.y,
+                200, 30};
+            
+            MurkaShape frameRectangle = {0, 0, context.getSize().x, context.getSize().y};
+            
+            if (labelShape.intersectsWithRectangle(frameRectangle)) {
+                drawWidget<Label>(context, {"Label #" + std::to_string(i)},
+                                  labelShape);
+                
+                howManyLabelsDidWeDraw++;
+            }
         }
         
+        ofSetColor(0);
+        ofDrawRectangle(0, 0, 200, 30);
+        drawWidget<Label>(context, {"Labels drawn: " + std::to_string(howManyLabelsDidWeDraw)}, {0, 0, 200, 30});
         
         drawWidget<ScrollBar>(context, {this}, {context.getSize().x - 27, 2, 20, context.getSize().y - 4});
         

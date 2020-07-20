@@ -29,8 +29,8 @@ public:
             ofDrawLine(0, j * gridsize, shape.size.x, j * gridsize);
         }
         
-        layoutGenerator.setLayoutLineHeight(30);
-        layoutGenerator.setLayoutStructure({0.5, {30, ALIGN_RIGHT}});
+        linearLayout.setLayoutLineHeight(30);
+        linearLayout.setLayoutStructure({0.5, {30, ALIGN_RIGHT}});
         
         drawWidget<Label>(context, {!inside? "Try hovering!" : "See??"});
 
