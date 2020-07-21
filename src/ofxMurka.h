@@ -1,6 +1,6 @@
 #pragma once
 
-
+#define MURKA_OF
 
 #include "../libs/Murka/Murka.h"
 #include "../libs/Murka/MurkaBasicWidgets.h"
