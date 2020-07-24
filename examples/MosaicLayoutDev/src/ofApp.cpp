@@ -5,7 +5,11 @@ void ofApp::setup(){
     m.setupFonts("Roboto-Regular.ttf", 12,
                  "Roboto-Regular.ttf", 20,
                  "Roboto-Regular.ttf", 12);
-
+    
+    m.setRenderer(ofGetGLRenderer().get());
+    
+//    m.setupRenderer(ofGLRenderer* r);
+//    m.setupRenderer(ofGetGLRenderer());
     
      
      
@@ -72,9 +76,9 @@ void ofApp::setup(){
      
      
     objects.clear();
-    for (int i = 0; i < 300; i++) {
-         objects.push_back(MurkaPoint(0 + ofRandom(405),
-                                      0 + ofRandom(405)));
+    for (int i = 0; i < 100; i++) {
+         objects.push_back(MurkaPoint(0 + ofRandom(75),
+                                      0 + ofRandom(75)));
     }
       
      

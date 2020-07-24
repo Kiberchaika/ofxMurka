@@ -5,6 +5,8 @@ void ofApp::setup(){
     m.setupFonts("Roboto-Regular.ttf", 12,
                  "Roboto-Regular.ttf", 20,
                  "Roboto-Regular.ttf", 12);
+    
+    m.setRenderer(ofGetGLRenderer().get());
 
     panes[0] = PaneInfo();
     panes[0].position = 0.5;
