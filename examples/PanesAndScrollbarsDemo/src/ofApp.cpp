@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	m.setRenderer(ofGetGLRenderer().get());
+	m.setWindow(ofGetWindowPtr());
 	m.setupFonts("Roboto-Regular.ttf", 12,
                  "Roboto-Regular.ttf", 20,
                  "Roboto-Regular.ttf", 12,
