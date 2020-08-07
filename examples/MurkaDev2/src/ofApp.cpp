@@ -4,8 +4,9 @@
 void ofApp::setup(){
 
     // Murka setup
-    
-    m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
+	m.setRenderer(ofGetGLRenderer().get());
+	m.setWindow(ofGetWindowPtr());
+	m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
                  "Roboto-Regular.ttf", 20 * uiScale,
                  "CamingoCode-Regular.ttf", 12 * uiScale);
     
