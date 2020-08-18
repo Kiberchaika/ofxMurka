@@ -6,9 +6,11 @@ void ofApp::setup(){
     // Murka setup
 	m.setRenderer(ofGetGLRenderer().get());
 	m.setWindow(ofGetWindowPtr());
-	m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
-                 "Roboto-Regular.ttf", 20 * uiScale,
-                 "CamingoCode-Regular.ttf", 12 * uiScale);
+    m.setResourcesPath(ofToDataPath(""));
+
+//	m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
+//                 "Roboto-Regular.ttf", 20 * uiScale,
+//                 "CamingoCode-Regular.ttf", 12 * uiScale);
     
     //
     
@@ -85,18 +87,14 @@ void ofApp::draw(){
     
     // Initial drawing and setup & object-oriented mode
 
+    m.setFont("Roboto-Regular.ttf", 12 * m.getUIScale());
+
     m.begin();
-    
-    
     
     m.beginDrawingInView(&m);
     if (drawWidget<SliderFloat>(m, &uiScale, {0.5, 2.5, "UI Scale"}, {20, 20, 175, 35})) {
         ofLog() << "uiScale changed";
         m.setUIScale(uiScale);
-        
-        m.setupFonts("Roboto-Regular.ttf", 12 * uiScale,
-                     "Roboto-Regular.ttf", 20 * uiScale,
-                     "CamingoCode-Regular.ttf", 12 * uiScale);
         
         m.clearChildren();
         

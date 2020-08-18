@@ -22,7 +22,7 @@ public:
 
         isWantsClicks = false;
 
-        auto font = context.getMonospaceFont();
+        auto font = context.getCurrentFont();
 
         ofPushStyle();
         for (size_t i = 0; i < params->labels.size(); i++) {
