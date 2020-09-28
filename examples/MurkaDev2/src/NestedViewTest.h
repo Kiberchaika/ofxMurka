@@ -23,10 +23,10 @@ public:
         ofSetColor(200);
         int gridsize = 20;
         for (int i = 0; i < int(shape.size.x / gridsize) + 1; i++) {
-            ofDrawLine(i * gridsize, 0, i * gridsize, shape.size.y);
+			context.renderer->drawLine(i * gridsize, 0, i * gridsize, shape.size.y);
         }
         for (int j = 0; j < int(shape.size.y / gridsize) + 1; j++) {
-            ofDrawLine(0, j * gridsize, shape.size.x, j * gridsize);
+			context.renderer->drawLine(0, j * gridsize, shape.size.x, j * gridsize);
         }
         
         linearLayout.setLayoutLineHeight(30);
@@ -53,10 +53,10 @@ public:
                 drawWidget<Label>(context, {
                     ofToString(context.mousePosition.x, 0) + ":" + ofToString(context.mousePosition.y, 0),
                     {1., 1., 1.}, {0.,0.,0.,.5}},
-                    {context.mousePosition.x / context.getUIScale(),
-                     context.mousePosition.y / context.getUIScale() + 20 / context.getUIScale(),
-                    75 * context.getUIScale(),
-                    30 * context.getUIScale()});
+                    {context.mousePosition.x,
+                     context.mousePosition.y + 20,
+                    75,
+                    30});
             }, this);
         }
     };

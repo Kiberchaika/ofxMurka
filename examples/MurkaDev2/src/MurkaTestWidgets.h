@@ -24,17 +24,15 @@ public:
 
         auto font = context.getCurrentFont();
 
-        ofPushStyle();
+		context.renderer->pushStyle();
         for (size_t i = 0; i < params->labels.size(); i++) {
-            ofPushMatrix();
-            ofTranslate(0, i*params->elementSize);
-
+			float offsetY = i * params->elementSize;
 
             bool active = false;
             if (inside) {
                 MurkaShape shape;
                 shape.position.x = 0;
-                shape.position.y = i * params->elementSize;
+                shape.position.y = offsetY;
                 shape.size.x = params->elementSize;
                 shape.size.y = params->elementSize;
 
@@ -46,24 +44,21 @@ public:
             }
             if (active) isWantsClicks = true;
 
-            ofFill();
+			context.renderer->enableFill();
             if (*data == i) {
-                ofSetColor(105);
+				context.renderer->setColor(105);
             }
             else if (active) {
-                ofSetColor(15);
+				context.renderer->setColor(15);
             }
             else {
-                ofSetColor(10);
+				context.renderer->setColor(10);
             }
-            ofDrawRectangle(1, 1, params->elementSize - 2, params->elementSize - 2);
-            ofSetColor(255);
-//                ofDrawBitmapString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
-            font->drawString(params->labels[i], params->elementSize + 5, params->elementSize / 2 + 5);
-
-            ofPopMatrix();
+			context.renderer->drawRectangle(1, 1 + offsetY, params->elementSize - 2, params->elementSize - 2);
+			context.renderer->setColor(255);
+            font->drawString(params->labels[i], params->elementSize + 5, params->elementSize/2 - font->getLineHeight() / 2 + offsetY);
         }
-        ofPopStyle();
+		context.renderer->popStyle();
 
         // Your drawing and interaction code goes here.
         // Don't forget that all of this executes at each frame for each

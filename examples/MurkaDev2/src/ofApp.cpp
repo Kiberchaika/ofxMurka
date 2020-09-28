@@ -14,7 +14,7 @@ void ofApp::setup(){
     
     //
     
-    m.setUIScale(uiScale);
+    m.setScreenScale(screenScale);
 
     createChildren();
     
@@ -55,20 +55,22 @@ void ofApp::createChildren(){
     
     // TODO: there is a weird bug that makes these two widgets a part of the panel
     // even though they're added to the core murka view.
+	/*
     Header::Parameters p;
     p.label = "OOP Mode";
 
     auto o = { "OOP Mode" };
 
-    header1 = m.addChildToView(/*panel1, */ new Header(),
+    header1 = m.addChildToView( new Header(),
                                    nullptr,
                                    {"OOP Mode"},
                                    {10, 5, 260, 50});
     
-    label1 = m.addChildToView(/*panel1, */ new Label(),
+    label1 = m.addChildToView( new Label(),
                                   nullptr,
                                   {"Manually created widget graph"},
                                   {10, 55, 260, 50});
+								  */
 }
 
 //--------------------------------------------------------------
@@ -76,25 +78,49 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
-    
+void ofApp::draw() {
+
 	ofClear(10);
-    
-    
-    auto time = ofGetElapsedTimef();
-    
-    b1->tParams->b = sin(time * 10) * 100 + 100;
-    
-    // Initial drawing and setup & object-oriented mode
 
-    m.setFont("Roboto-Regular.ttf", 12 * m.getUIScale());
 
-    m.begin();
+	auto time = ofGetElapsedTimef();
+
+	b1->tParams->b = sin(time * 10) * 100 + 100;
+
+	// Initial drawing and setup & object-oriented mode
+
+	m.setFont("Roboto-Regular.ttf", 12);
+
+
+
+	m.begin();
+
+	drawWidget<Label>(m, { "TESTTEST" }, { 50, 5, 200, 50 });
+
+	/*
+	auto font = m.getCurrentFont();
+	auto bbox = font->getStringBoundingBox("TESTTEST", 0, 0);
+	auto h = font->getLineHeight();
+	m.setColor(255, 0, 0);
+	m.drawLine(50 + 5, 5, 50 + 5 + bbox.width, 5 + h);
+	m.drawLine(50 + 5 + bbox.width, 5, 50 + 5, 5 + h);
     
+	m.disableFill();
+	m.setColor(MurkaColor(1,0,0,1));
+	auto symbolsBoundingBoxes = font->getStringSymbolsBoundingBoxes("TESTTEST", 50 + 5, 5, false);
+
+	for (int i = 0; i < 8; i++) {
+		m.drawRectangle(symbolsBoundingBoxes[i].x, symbolsBoundingBoxes[i].y, symbolsBoundingBoxes[i].width, symbolsBoundingBoxes[i].height);
+	}
+	
+	m.enableFill();
+	*/
+
+	m.setColor(255, 255, 255);
     m.beginDrawingInView(&m);
-    if (drawWidget<SliderFloat>(m, &uiScale, {0.5, 2.5, "UI Scale"}, {20, 20, 175, 35})) {
+    if (drawWidget<SliderFloat>(m, &screenScale, {0.5, 2.5, "UI Scale"}, {20, 70, 175, 35})) {
         ofLog() << "uiScale changed";
-        m.setUIScale(uiScale);
+        m.setScreenScale(screenScale);
         
         m.clearChildren();
         
@@ -112,7 +138,7 @@ void ofApp::draw(){
     drawWidget<BlankPanel>(m, {"", booleanTest}, {650, 50, 260, 500});
     
     
-    auto panelShape = m.getLatestChildShape() / m.getUIScale(); // going to use this to resize widgets manually
+    auto panelShape = m.getLatestChildShape(); // going to use this to resize widgets manually
 
     m.beginDrawingInLatestView();
 
@@ -144,13 +170,13 @@ void ofApp::draw(){
 
 
     m.beginDrawingInView(&m);
-    drawWidget<BlankPanel>(m, {"", true, 261, 400}, {50, 50, 261, 651});
+    drawWidget<BlankPanel>(m, {"", true, 261, 400}, {50, 150, 261, 651});
 
     m.beginDrawingInLatestView();
 
     drawWidget<Header>(m, {"IM Autolayout"}, {20, 5,  260, 45});
 
-    m.setLayoutLinearOffset(60 * m.getUIScale()); // This is a current offset from the top.
+    m.setLayoutLinearOffset(60); // This is a current offset from the top.
                                                   // You can set it manually at any time if you need
                                                   // to use custom layout for parts of the UI and
                                                   // the auto layout for the rest of it.
