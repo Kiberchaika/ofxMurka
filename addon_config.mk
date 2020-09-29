@@ -8,3 +8,6 @@ meta:
 vs:
 	ADDON_SOURCES_EXCLUDE = src/mac/%
 	ADDON_INCLUDES_EXCLUDE = src/mac/%
+	ADDON_DEFINES = MURKA_OF
+
+
