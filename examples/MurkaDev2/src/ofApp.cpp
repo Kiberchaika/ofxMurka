@@ -146,6 +146,12 @@ void ofApp::draw() {
 
     drawWidget<Label>(m, {"Manual IM mode layout"}, {20, 55,  panelShape.size.x - 40, 35});
     drawWidget<Checkbox>(m, &booleanTest, {"Moveable panel"}, {20, 85, panelShape.size.x - 40, 35});
+    
+    /* // NEW API
+    drawWidget<Checkbox>(m, {20, 85, panelShape.size.x - 40, 35})
+        .controlData(&booleanTest)
+        .withLabel("Moveable panel");
+     */
 
     drawWidget<SliderFloat>(m, &(*testArray.begin()), {"slider 2"}, {20, 120, panelShape.size.x - 40, 35});
     drawWidget<SliderFloat>(m, &(*(testArray.begin() + 1)), {"slider 3"}, {20, 160, panelShape.size.x - 40, 35});
