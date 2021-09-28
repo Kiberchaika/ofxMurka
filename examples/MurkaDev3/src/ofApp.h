@@ -4,13 +4,15 @@
 //#include "ofxLiveApp.h"
 #include "ofxMurka.h"
 
+#include "Label.h"
+
 #include "NestedViewTest.h"
 #include "MurkaTestWidgets.h"
 
 using namespace murka;
 
  
-class ofApp : public ofBaseApp {
+class ofApp : public ofBaseApp, public MurkaAnimator {
 
 	public:
 		void setup();
@@ -34,6 +36,8 @@ class ofApp : public ofBaseApp {
         void createChildren();
 		
 		Murka m;
+    
+        bool hoveredLabel = false;
 /*
         Button b;
     

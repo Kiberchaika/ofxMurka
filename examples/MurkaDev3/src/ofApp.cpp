@@ -11,45 +11,13 @@ void ofApp::setup(){
     //
     m.shape = {0, 0, ofGetWidth(), ofGetHeight()};
     m.setScreenScale(screenScale);
-
-//    createChildren();
+ 
     
 }
 
 //--------------------------------------------------------------
 void ofApp::createChildren(){
-    /*
-    panel1 = m.addChildToView(new BlankPanel(),
-                                   nullptr,
-                                   {"panel1", true},
-                                   {350, 50, 260, 500});
-    
-    rb = m.addChildToView(panel1, new RadioButtonGroup(),
-        &radioRata, // the data it controls
-        { { "test1", "test2" } },
-        { 20, 120, 100, 100 });
-    
-    b1 = m.addChildToView(panel1, new Button(),
-                               nullptr, // the data it controls
-                               {"button1"},
-                               {20, 220, 100, 35});
 
-    b2 = m.addChildToView(panel1, new Button(),
-                               nullptr, // the data it controls
-                               {120, 220, 120, "button2"},
-                               {140, 220, 100, 35});
-    
-    slider1 = m.addChildToView(panel1, new SliderFloat(),
-                                    &(*testArray.begin()),
-                                    {0, 1, "slider 1"},
-                                    {20, 320, 220, 35});
-    
-    textField1 = m.addChildToView(panel1, new TextField(),
-                                       &testString,
-                                       {},
-                                       {20, 370, 220, 35});
-    
-*/
 }
 
 //--------------------------------------------------------------
@@ -58,6 +26,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    
+    animationRestart();
 
 	ofClear(10);
 
@@ -74,14 +44,55 @@ void ofApp::draw() {
 	m.begin();
 
     m.setColor(220, 220, 220, 255);
-	drawWidget_NEW<Label>(m, { 50, 50, 200, 50 })
-        .label = "time passed: " + std::to_string(ofGetElapsedTimef());
+    m.setColor(220, A(hoveredLabel) * 220, A(hoveredLabel) * 220);
+//    ofSetColor(220, A(hoveredLabel) * 220, A(hoveredLabel) * 220);
     
-    m.getCurrentFont()->drawString("gggg", 5, 100);
+    /*
+    drawWidget_NEW<Label>(m, { 50, 50, 300, 50 })
+        .text("time passed: " + std::to_string(ofGetElapsedTimef()) + " ; hovered ? " + (hoveredLabel ? " yes " : " no "))
+        .onHoverChange([&](Label& l) {
+            hoveredLabel = l.isHovered;
+        })
+        .onClick([&](Label& l) {
+            ofLog() << "clicked!";
+        });
+    */
+    
+    // 1. Унаследовать контекст от рендерера? Чтобы вызывать рендеринг из виджетов не обращаясь к указателю на рендер.  Вердикт: не вйыдет. Передавать указатель на рендер в internalDraw.
+//      + вынести Renderer из наследников объекта Murka в отдельный объект, чтобы рисование внутри виджетов и в самой программе было устроено одинаково.
+    // 2. Добавить такую же функцию draw контексту? Зачем?
+    // 3. Решить с цветом. 255 или 1? 1.
+    // 4. resetKeyboardFocus когда вьюшка пропала.
+    
+    // И ещё:
+    // 5. Параметры у коллбэков внутри виджетов?
 
-    // Commit deferred view calls the base class draw() instead of derived one. Fix this somehow.
+    m.draw<Label>({ 50, 50, 300, 50 })
+        .text("time passed: " + std::to_string(ofGetElapsedTimef()) + " ; hovered ? " + (hoveredLabel ? " yes " : " no "))
+        .onHoverChange([&](Label& l) {
+            hoveredLabel = l.isHovered;
+        })
+        .onClick([&](Label& l) {
+            ofLog() << "clicked!";
+        })
+        .onClickPosition([&](Label &l, MurkaPoint p) {
+            ofLog() << "clicked! callback arguments: " << p.x << " ; " << p.y;
+        });
+    
     m.currentContext.commitDeferredView();
     
+    
+
+//    drawWidget_NEW<ReticleGrid>(m, { 50, 50, 200, 50 })
+//        .setBackgroundColor(200, 0, 200)
+//        .controlYPR(&ypr);
+    
+    
+    auto ffont = m.getCurrentFont();
+
+    // Commit deferred view calls the base class draw() instead of derived one. Fix this somehow.
+ 
+ 
     /*
     Label::purr(m, { 50, 50, 200, 50 })
         .label = "yo";

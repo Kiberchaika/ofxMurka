@@ -24,7 +24,7 @@ public:
 
         auto font = context.getCurrentFont();
 
-		context.renderer->pushStyle();
+		context.pointerToRenderer->pushStyle();
         for (size_t i = 0; i < params->labels.size(); i++) {
 			float offsetY = i * params->elementSize;
 
@@ -44,21 +44,21 @@ public:
             }
             if (active) isWantsClicks = true;
 
-			context.renderer->enableFill();
+			context.pointerToRenderer->enableFill();
             if (*data == i) {
-				context.renderer->setColor(105);
+				context.pointerToRenderer->setColor(105);
             }
             else if (active) {
-				context.renderer->setColor(15);
+				context.pointerToRenderer->setColor(15);
             }
             else {
-				context.renderer->setColor(10);
+				context.pointerToRenderer->setColor(10);
             }
-			context.renderer->drawRectangle(1, 1 + offsetY, params->elementSize - 2, params->elementSize - 2);
-			context.renderer->setColor(255);
+			context.pointerToRenderer->drawRectangle(1, 1 + offsetY, params->elementSize - 2, params->elementSize - 2);
+			context.pointerToRenderer->setColor(255);
             font->drawString(params->labels[i], params->elementSize + 5, params->elementSize/2 - font->getLineHeight() / 2 + offsetY);
         }
-		context.renderer->popStyle();
+		context.pointerToRenderer->popStyle();
 
         // Your drawing and interaction code goes here.
         // Don't forget that all of this executes at each frame for each
