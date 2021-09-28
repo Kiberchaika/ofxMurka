@@ -2,8 +2,6 @@
 
 namespace murka {
 	class CircleField : public View_NEW<CircleField> {
-	public:
-
 		bool isPointInsideRect(MurkaPoint p, vector<MurkaPoint> rectPoints) {
 			int cnt = 0;
 			for (int i = 0; i < 4; i++) {
@@ -13,7 +11,7 @@ namespace murka {
 			}
 			return cnt % 2 != 0;
 		}
-			 
+
 		bool isLinesIntersect(MurkaPoint v11, MurkaPoint v12, MurkaPoint v21, MurkaPoint v22) {
 			float d1, d2;
 			float a1, a2, b1, b2, c1, c2;
@@ -49,6 +47,9 @@ namespace murka {
 			return MurkaPoint(x, y);
 		}
 
+	public:
+
+
 		void internalDraw(const MurkaContextBase & c) {
 
 			bool inside = c.isHovered() * !areChildrenHovered(c);
@@ -57,8 +58,6 @@ namespace murka {
 				isHovered = inside;
 				onHoverChangeCallback(*this);
 			}
-
-
 		
 			//        if (c.mouseButtonsChanged[0] && c.mouseDown[0])
 
@@ -70,6 +69,7 @@ namespace murka {
 			c.pointerToRenderer->setColor(100);
 			c.pointerToRenderer->drawRectangle(0, 0, shape.size.x, shape.size.y);
 
+			// draw circle
 			c.pointerToRenderer->setColor(255);
 			vector<MurkaPoint> vert;
 			for (int i = 0; i <= 360; i += 5) {
@@ -81,8 +81,7 @@ namespace murka {
 			}
 			c.pointerToRenderer->setLineWidth(1);
 
-			
-
+			// draw rect and check mouse inside it
 			vector<MurkaPoint> rectPoints;
 			rectPoints.push_back(MurkaPoint(-50, -10));
 			rectPoints.push_back(MurkaPoint(-50, 10));
@@ -100,10 +99,7 @@ namespace murka {
 				ofVec3f v = ofVec3f(rectPoints[i].x, rectPoints[i].y, 0) * m;
 				rectPoints[i] = MurkaPoint(v.x, v.y);
 			}
-			for (int i = 0; i < 4; i++) {
-				//c.pointerToRenderer->drawLine(rectPoints[i].x, rectPoints[i].y, rectPoints[(i + 1) % 4].x, rectPoints[(i + 1) % 4].y);
-			}
-			 
+
 			if (isPointInsideRect(c.mousePosition, rectPoints)) {
 				c.pointerToRenderer->setColor(255, 0, 0);
 			}
@@ -250,7 +246,7 @@ void ofApp::draw() {
 	m.draw<CircleField>({ 50, 50, 400, 400 })
 		.text("time passed: " + std::to_string(ofGetElapsedTimef()) + " ; hovered ? " + (hoveredLabel ? " yes " : " no "))
 		.onHoverChange([&](CircleField& l) {
-			hoveredLabel = l.isHovered;
+			ofLog() << "hovered!";
 		})
 		.onClick([&](CircleField& l) {
 			ofLog() << "clicked!";
