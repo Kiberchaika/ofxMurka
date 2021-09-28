@@ -12,7 +12,7 @@
 using namespace murka;
 
  
-class ofApp : public ofBaseApp, public MurkaAnimator {
+class ofApp : public ofBaseApp, public MurkaAnimator { // ofxLiveApp
 
 	public:
 		void setup();
